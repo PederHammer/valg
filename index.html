@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <title>Hvad betyder det til kommunalvalget?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Et neutralt værktøj der forklarer kommunale valgemner i hverdagssprog.">
+  <style>
+    :root {
+      --bg: #f4f5fb;
+      --card-bg: #ffffff;
+      --accent: #1f6feb;
+      --accent-soft: #e2ecff;
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --border-soft: #e5e7eb;
+      --radius-lg: 16px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #eef2ff 0, #f4f5fb 50%, #f9fafb 100%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .page {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(31, 111, 235, 0.06);
+      border: 1px solid rgba(31, 111, 235, 0.18);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      margin: 10px 0 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        padding: 16px;
+      }
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .side-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      padding: 16px 18px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      backdrop-filter: blur(12px);
+    }
+
+    .side-card h2 {
+      font-size: 1rem;
+      margin: 0 0 4px;
+    }
+
+    .side-card ul {
+      padding-left: 18px;
+      margin: 8px 0 0;
+    }
+
+    .selector-card {
+      background: linear-gradient(145deg, #ffffff 0, #f7f8ff 55%, #eef2ff 100%);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .selector-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      font-size: 0.98rem;
+      outline: none;
+      background: #ffffff;
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #6b7280 50%),
+        linear-gradient(135deg, #6b7280 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) 52%,
+        calc(100% - 11px) 52%;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(31, 111, 235, 0.15);
+    }
+
+    .helper {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .issue-card {
+      margin-top: 16px;
+      padding: 18px 18px 16px;
+      border-radius: var(--radius-lg);
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+    }
+
+    .issue-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .issue-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .issue-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .issue-tag {
+      font-size: 0.78rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+
+    .issue-section {
+      margin-top: 10px;
+    }
+
+    .issue-section h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin: 0 0 4px;
+    }
+
+    .issue-section p {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: #111827;
+    }
+
+    .issue-section ul {
+      margin: 4px 0 0;
+      padding-left: 18px;
+      font-size: 0.95rem;
+      color: #111827;
+    }
+
+    .issue-section li + li {
+      margin-top: 2px;
+    }
+
+    .questions-list li::marker {
+      color: var(--accent);
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    .footer-note a {
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-labelledby="page-title">
+    <header>
+      <div class="badge">
+        <span class="dot" aria-hidden="true"></span>
+        Kommunalvalg - hjælp til at forstå emnerne
+      </div>
+      <h1 id="page-title">Hvad betyder det egentlig, når de taler om kommunalpolitik?</h1>
+      <p class="subtitle">
+        Denne side er partipolitisk uafhængig. Den forklarer i klare ord, hvad typiske kommunale emner betyder i praksis,
+        hvad kommunen faktisk bestemmer, og hvilke spørgsmål du kan stille kandidaterne, før du stemmer.
+      </p>
+    </header>
+
+    <section class="layout">
+      <aside class="side-card" aria-label="Kort om kommunalvalg">
+        <h2>Hvad laver en kommune egentlig?</h2>
+        <p>
+          Kommunalbestyrelsen beslutter blandt andet rammerne for:
+        </p>
+        <ul>
+          <li>Folkeskole, dagtilbud og specialtilbud</li>
+          <li>Ældrepleje, hjemmehjælp og plejehjem</li>
+          <li>Sociale indsatser for udsatte borgere</li>
+          <li>Veje, byudvikling og lokalplaner</li>
+          <li>Lokal natur, miljø og klimaindsatser</li>
+          <li>Kultur, fritidstilbud og idrætsfaciliteter</li>
+        </ul>
+        <p style="margin-top:8px;">
+          Mange valgudspil blander landspolitik og kommunalpolitik. Brug værktøjet til at se,
+          hvad der faktisk ligger på kommunens bord.
+        </p>
+      </aside>
+
+      <section aria-label="Vælg emne og få forklaring">
+        <div class="selector-card">
+          <div class="selector-label">1. Vælg et emne</div>
+          <label for="issue-select" class="visually-hidden">Vælg kommunalt emne</label>
+          <select id="issue-select">
+            <option value="">Vælg et emne fra listen</option>
+            <option value="aeldre">Ældrepleje og hjemmehjælp</option>
+            <option value="skole">Folkeskole og dagtilbud</option>
+            <option value="byudvikling">Byudvikling og lokalplaner</option>
+            <option value="trafik">Kollektiv trafik og lokal infrastruktur</option>
+            <option value="klima">Lokal klima og grøn omstilling</option>
+            <option value="social">Social udsathed og børn unge i mistrivsel</option>
+            <option value="oekonomi">Kommunens økonomi og skat</option>
+          </select>
+          <p class="helper">
+            Du får en kort forklaring, konkrete eksempler og forslag til spørgsmål, du kan stille politikere eller kandidater.
+          </p>
+
+          <article id="issue-card" class="issue-card" aria-live="polite"></article>
+
+          <p class="footer-note">
+            Indholdet er generelt og kan være forskelligt fra kommune til kommune. Tjek altid din egen kommunes hjemmeside,
+            hvis du vil ned i detaljer.
+          </p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const issues = {
+      aeldre: {
+        title: "Ældrepleje og hjemmehjælp",
+        tag: "Kommunen beslutter rammer og serviceniveau",
+        intro: "Når kandidater taler om værdig ældrepleje, handler det om både økonomi, normering, organisering og kvalitet i den hjælp, kommunen giver ældre borgere.",
+        responsibilities: [
+          "Kommunen fastsætter serviceniveauet for hjemmehjælp og plejehjem, fx hvor ofte der kommer hjælp til rengøring, bad og personlig pleje",
+          "Kommunen driver eller indgår aftaler om plejecentre og midlertidige pladser",
+          "Kommunen beslutter organiseringen af hjemmeplejen, fx faste teams, frit valg og brug af private leverandører",
+          "Kommunen sætter rammer for kvalitet, tilsyn og opfølgning på klager"
+        ],
+        practice: [
+          "Ventetid på en plejebolig kan være kort eller lang alt efter kommunens prioriteringer og kapacitet",
+          "Hjemmehjælpen kan have meget lidt tid hos hver borger eller mere tid til nærvær, afhængigt af normeringer og arbejdspres",
+          "Der kan være stor forskel på, om du møder de samme medarbejdere, eller mange skiftende ansigter",
+          "Kommunen kan vælge at styrke forebyggende hjemmebesøg og støtte, så ældre kan klare sig selv længere"
+        ],
+        questions: [
+          "Hvordan vil I konkret måle og følge op på kvaliteten i hjemmeplejen og på plejehjem?",
+          "Vil I prioritere flere medarbejdere nær borgerne, og hvad vil I i givet fald skære ned på for at finansiere det?",
+          "Hvordan sikrer I, at ældre møder så få forskellige medarbejdere som muligt i hverdagen?"
+        ]
+      },
+      skole: {
+        title: "Folkeskole og dagtilbud",
+        tag: "Kommunen er arbejdsgiver og ansvarlig for rammerne",
+        intro: "Når politikere taler om bedre skoler og dagtilbud, handler det i kommunal politik især om normeringer, bygninger, pædagogisk retning og økonomi.",
+        responsibilities: [
+          "Kommunen ejer og driver folkeskoler, SFO og daginstitutioner (børnehaver, vuggestuer) og godkender private tilbud",
+          "Kommunen beslutter lukning, sammenlægning og oprettelse af skoler og institutioner",
+          "Kommunen fastlægger klassestørrelser og normeringer inden for den økonomiske ramme",
+          "Kommunen har ansvar for specialtilbud, inklusion og støtte til børn med særlige behov"
+        ],
+        practice: [
+          "Dit barns skole kan blive lagt sammen med en anden eller få færre klasser, hvis kommunen ændrer sin skolestruktur",
+          "Klassestørrelser og antal voksne i klassen påvirkes direkte af kommunens budgetvalg",
+          "Kvaliteten af bygninger, indeklima og legepladser afhænger af kommunens prioriteringer",
+          "Der kan være stor forskel mellem kommuner på, hvor hurtigt børn med særlige behov får støtte"
+        ],
+        questions: [
+          "Vil I ændre på skolestrukturen i kommunen de næste fire år, og hvad betyder det konkret for mit lokalområde?",
+          "Hvad er jeres mål for klassestørrelser og normeringer, og hvordan vil I følge op på dem?",
+          "Hvordan vil I sikre, at børn med særlige behov får hjælp tidligt nok?"
+        ]
+      },
+      byudvikling: {
+        title: "Byudvikling og lokalplaner",
+        tag: "Kommunen styrer, hvad der må bygges hvor",
+        intro: "Byudvikling lyder abstrakt, men det handler om meget konkrete ting: hvor der må bygges, hvor højt, hvor tæt og hvad der skal bevares.",
+        responsibilities: [
+          "Kommunen udarbejder lokalplaner, der bestemmer, hvad der må bygges på et område, og hvordan det skal se ud",
+          "Kommunen beslutter, hvor der skal være boliger, erhverv, grønne områder og institutioner",
+          "Kommunen kan stille krav til parkering, fællesarealer, støjafskærmning, beplantning mv.",
+          "Kommunen gennemfører høringer, hvor borgere kan komme med indsigelser og forslag"
+        ],
+        practice: [
+          "Et grønt område kan blive til et nyt boligbyggeri, hvis kommunen ændrer lokalplanen",
+          "Trafikken i et boligkvarter kan stige markant, hvis der bygges flere boliger uden nye løsninger til vej og parkering",
+          "Historiske bygninger kan bevares eller rives ned som led i en samlet plan",
+          "Din mulighed for at gøre indsigelse i høringsfasen afhænger af, hvor tydeligt og tilgængeligt kommunen informerer"
+        ],
+        questions: [
+          "Hvordan vil I sikre en god balance mellem nye boliger, grønne områder og trafik i vores kommune?",
+          "Hvordan gør I det nemt for helt almindelige borgere at forstå og reagere på lokalplaner?",
+          "Hvilke principper styrer jeres valg, når I skal sige ja eller nej til høj og tæt bebyggelse?"
+        ]
+      },
+      trafik: {
+        title: "Kollektiv trafik og lokal infrastruktur",
+        tag: "Kommunen planlægger veje, stier og lokal mobilitet",
+        intro: "Kollektiv trafik er ofte et delt ansvar mellem region og kommune, men kommunerne har stor indflydelse på, hvordan hverdagen fungerer for cyklister, bilister og gående.",
+        responsibilities: [
+          "Kommunen vedligeholder kommunale veje, cykelstier og fortove",
+          "Kommunen kan prioritere trafiksikkerhed, hastighedszoner og skoleveje",
+          "Kommunen samarbejder med region og trafikselskab om placering af stoppesteder og linjeføring",
+          "Kommunen kan satse på delebiler, ladepunkter til elbiler og mere plads til cykler"
+        ],
+        practice: [
+          "Der kan komme nye eller tryggere cykelstier, hvis kommunen prioriterer det i anlægsbudgettet",
+          "Buslinjer kan ændres, nedlægges eller styrkes afhængigt af aftaler og kommunale tilskud",
+          "Skoleveje kan blive mere sikre med nedsat hastighed, bump og bedre kryds",
+          "Parkering kan gøres dyrere, billigere eller omlægges for at styre trafikken"
+        ],
+        questions: [
+          "Hvilke konkrete projekter for sikre skoleveje vil I gennemføre i næste valgperiode?",
+          "Hvordan vil I styrke kollektiv trafik og cykling i de områder, hvor det i dag er svært at komme rundt uden bil?",
+          "Hvilke principper bruger I, når I prioriterer mellem vejprojekter, cykelstier og parkeringspladser?"
+        ]
+      },
+      klima: {
+        title: "Lokal klima og grøn omstilling",
+        tag: "Kommunen omsætter klimaambitioner til lokale valg",
+        intro: "Klimaaftaler laves ofte nationalt og internationalt, men kommunerne afgør meget af det, der kan mærkes lokalt i hverdagen.",
+        responsibilities: [
+          "Kommunen kan stille klimakrav i lokalplaner og til nye byggerier",
+          "Kommunen kan planlægge energirenovering af egne bygninger, fx skoler og plejecentre",
+          "Kommunen har indflydelse på affaldssortering, genbrug og genanvendelse",
+          "Kommunen kan beskytte mod oversvømmelse, fx med klimatilpasning langs kyster og vandløb"
+        ],
+        practice: [
+          "Nye boligkvarterer kan få krav om grønne områder, regnvandshåndtering og energivenlige løsninger",
+          "Din hverdag kan påvirkes af ændret affaldssortering og nye ordninger for genbrug",
+          "Kommunen kan vælge at gøre det lettere at vælge cykel, bus eller elbil frem for benzinbil",
+          "Udvikling i områder, der er udsatte for oversvømmelse, kan begrænses eller kræve særlige løsninger"
+        ],
+        questions: [
+          "Hvad er de tre vigtigste klimaindsatser, I vil gennemføre lokalt de næste fire år?",
+          "Hvordan afvejer I klimaindsatser over for andre hensyn, fx økonomi eller kortsigtet bekvemmelighed?",
+          "Hvordan vil I gøre det nemt for borgere og lokale virksomheder at bidrage til den grønne omstilling?"
+        ]
+      },
+      social: {
+        title: "Social udsathed og børn unge i mistrivsel",
+        tag: "Kommunen har ansvar for støtte og forebyggelse",
+        intro: "Socialpolitik i kommunen handler både om forebyggelse og om støtte til mennesker, der har det svært - fx børn i mistrivsel, hjemløse eller borgere med psykiske udfordringer.",
+        responsibilities: [
+          "Kommunen har ansvar for børn og unge, der mistrives, og kan sætte ind med støtte i skole, dagtilbud og familie",
+          "Kommunen driver tilbud til udsatte grupper, fx væresteder, herberger og misbrugsbehandling",
+          "Kommunen træffer afgørelser om anbringelser af børn og unge",
+          "Kommunen samarbejder med region og andre myndigheder om psykisk sygdom og komplekse forløb"
+        ],
+        practice: [
+          "Nogle kommuner investerer mere i tidlig indsats, så problemer opdages og håndteres før de vokser sig store",
+          "Ventetid på støtte og hjælp kan være kort eller lang afhængigt af prioritering og ressourcer",
+          "Der kan være forskel på, hvor hurtigt skoler og dagtilbud får hjælp fra PPR og socialforvaltning",
+          "Kommunen kan vælge at styrke lokale tilbud, hvor borgere kan få rådgivning uden lang sagsgang"
+        ],
+        questions: [
+          "Hvordan vil I sikre, at børn i mistrivsel bliver opdaget tidligere, og at hjælpen kommer hurtigere?",
+          "Hvor meget vil I investere i forebyggelse, selv om gevinsten først kommer senere?",
+          "Hvordan vil I lytte til erfaringer fra borgere, der selv har været i kontakt med systemet?"
+        ]
+      },
+      oekonomi: {
+        title: "Kommunens økonomi og skat",
+        tag: "Kommunen prioriterer mellem velfærd, anlæg og skat",
+        intro: "Når kandidater taler om ansvarlig økonomi, handler det i praksis om, hvordan pengene fordeles mellem velfærdsområder, byggeri og eventuelle skattelettelser eller skatteforhøjelser.",
+        responsibilities: [
+          "Kommunalbestyrelsen vedtager hvert år budget og skatteprocent",
+          "Kommunen prioriterer, hvor meget der skal bruges på ældre, skole, socialområdet, kultur mv.",
+          "Kommunen beslutter større anlægsprojekter, fx nye skoler, veje eller idrætsanlæg",
+          "Kommunen er underlagt regler for økonomi og tilsyn, men har stadig betydelig frihed til at vælge niveau"
+        ],
+        practice: [
+          "Et løfte om ikke at hæve skatten kan betyde, at der er mindre plads til nye velfærdsforbedringer",
+          "Store anlægsprojekter kan tage midler fra driften på kort sigt eller kræve besparelser andre steder",
+          "Små ændringer i budgettet kan mærkes tydeligt i hverdagen, fx færre voksne i dagtilbud eller strammere visitering",
+          "Kommuner med stram økonomi kan være nødt til at spare, også selv om der politisk er vilje til at gøre mere"
+        ],
+        questions: [
+          "Hvis I lover at forbedre et område, hvor vil I så konkret finde pengene?",
+          "Er I åbne for at hæve eller sænke skatten, og hvad skal der i givet fald til for, at I vil gøre det?",
+          "Hvilke tre ting vil I under ingen omstændigheder spare på i den kommende valgperiode?"
+        ]
+      }
+    };
+
+    const issueSelect = document.getElementById("issue-select");
+    const issueCard = document.getElementById("issue-card");
+
+    function renderIssue(key) {
+      const issue = issues[key];
+      if (!issue) {
+        issueCard.classList.remove("visible");
+        issueCard.innerHTML = "";
+        return;
+      }
+
+      const responsibilitiesList = issue.responsibilities
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
+      const practiceList = issue.practice
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
+      const questionsList = issue.questions
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
+      issueCard.innerHTML = `
+        <div class="issue-header">
+          <div class="issue-title">${issue.title}</div>
+          <div class="issue-tag">${issue.tag}</div>
+        </div>
+        <div class="issue-section">
+          <h3>Kort fortalt</h3>
+          <p>${issue.intro}</p>
+        </div>
+        <div class="issue-section">
+          <h3>Hvad bestemmer kommunen?</h3>
+          <ul>${responsibilitiesList}</ul>
+        </div>
+        <div class="issue-section">
+          <h3>Hvad kan det betyde i praksis?</h3>
+          <ul>${practiceList}</ul>
+        </div>
+        <div class="issue-section">
+          <h3>Spørgsmål du kan stille kandidaterne</h3>
+          <ul class="questions-list">${questionsList}</ul>
+        </div>
+      `;
+
+      // lille fade in
+      requestAnimationFrame(() => {
+        issueCard.classList.add("visible");
+      });
+    }
+
+    issueSelect.addEventListener("change", (e) => {
+      renderIssue(e.target.value);
+    });
+  </script>
+</body>
+</html>
