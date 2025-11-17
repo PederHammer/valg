@@ -2,55 +2,61 @@
 <html lang="da">
 <head>
   <meta charset="utf-8">
-  <title>Hvad betyder det til kommunalvalget?</title>
+  <title>Hvad betyder kommunalvalget for dig?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Et neutralt værktøj der forklarer kommunale valgemner i hverdagssprog.">
+  <meta name="description" content="En neutral, personlig guide til hvad kommunalvalget kan betyde for din hverdag.">
   <style>
     :root {
-      --bg: #f4f5fb;
+      --bg: #f3f4ff;
       --card-bg: #ffffff;
-      --accent: #1f6feb;
-      --accent-soft: #e2ecff;
-      --text-main: #111827;
-      --text-muted: #4b5563;
+      --accent: #2563eb;
+      --accent-soft: #e0ebff;
+      --accent-strong: #1d4ed8;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
       --border-soft: #e5e7eb;
-      --radius-lg: 16px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #eef2ff 0, #f4f5fb 50%, #f9fafb 100%);
+      background: radial-gradient(circle at top, #dbeafe 0, #eef2ff 40%, #f9fafb 100%);
       color: var(--text-main);
       display: flex;
       justify-content: center;
-      padding: 24px;
+      padding: 18px;
     }
 
     .page {
-      max-width: 960px;
       width: 100%;
+      max-width: 1040px;
     }
 
     header {
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 10px;
+      padding: 4px 11px;
       border-radius: 999px;
-      background: rgba(31, 111, 235, 0.06);
-      border: 1px solid rgba(31, 111, 235, 0.18);
+      background: rgba(37, 99, 235, 0.07);
+      border: 1px solid rgba(37, 99, 235, 0.18);
       font-size: 12px;
       color: var(--text-muted);
+      backdrop-filter: blur(10px);
     }
 
     .dot {
@@ -61,134 +67,311 @@
     }
 
     h1 {
-      font-size: clamp(1.8rem, 3vw, 2.3rem);
-      margin: 10px 0 6px;
-      letter-spacing: -0.02em;
+      font-size: clamp(1.9rem, 3.2vw, 2.4rem);
+      margin: 10px 0 8px;
+      letter-spacing: -0.03em;
     }
 
     .subtitle {
-      max-width: 650px;
+      max-width: 680px;
       color: var(--text-muted);
       font-size: 0.98rem;
-      line-height: 1.5;
+      line-height: 1.55;
+      margin: 0;
     }
 
     .layout {
+      margin-top: 10px;
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
-      gap: 20px;
+      gap: 22px;
       align-items: flex-start;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 880px) {
       body {
-        padding: 16px;
+        padding: 14px;
       }
       .layout {
         grid-template-columns: 1fr;
       }
     }
 
-    .side-card {
-      background: rgba(255, 255, 255, 0.9);
+    .info-card {
+      background: rgba(255, 255, 255, 0.94);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-soft);
-      padding: 16px 18px;
-      font-size: 0.9rem;
+      padding: 16px 18px 16px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+      backdrop-filter: blur(16px);
+      font-size: 0.93rem;
       color: var(--text-muted);
-      backdrop-filter: blur(12px);
     }
 
-    .side-card h2 {
+    .info-card h2 {
       font-size: 1rem;
-      margin: 0 0 4px;
+      margin: 0 0 6px;
+      color: var(--text-main);
     }
 
-    .side-card ul {
+    .info-card p {
+      margin: 4px 0;
+      line-height: 1.5;
+    }
+
+    .info-card ul {
+      margin: 8px 0 4px;
       padding-left: 18px;
-      margin: 8px 0 0;
     }
 
-    .selector-card {
-      background: linear-gradient(145deg, #ffffff 0, #f7f8ff 55%, #eef2ff 100%);
-      border-radius: var(--radius-lg);
-      padding: 18px 18px 16px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: var(--shadow-soft);
+    .info-card li + li {
+      margin-top: 2px;
     }
 
-    .selector-label {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    select {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid #d1d5db;
-      font-size: 0.98rem;
-      outline: none;
-      background: #ffffff;
-      appearance: none;
-      background-image:
-        linear-gradient(45deg, transparent 50%, #6b7280 50%),
-        linear-gradient(135deg, #6b7280 50%, transparent 50%);
-      background-position:
-        calc(100% - 16px) 52%,
-        calc(100% - 11px) 52%;
-      background-size: 6px 6px, 6px 6px;
-      background-repeat: no-repeat;
-    }
-
-    select:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(31, 111, 235, 0.15);
-    }
-
-    .helper {
+    .helper-note {
       font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 6px;
+      color: #9ca3af;
+      margin-top: 8px;
     }
 
-    .issue-card {
-      margin-top: 16px;
+    .tool-card {
+      background: linear-gradient(145deg, #ffffff 0, #f4f5ff 45%, #e0ebff 100%);
+      border-radius: 26px;
       padding: 18px 18px 16px;
-      border-radius: var(--radius-lg);
-      background: var(--card-bg);
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
     }
 
-    .issue-card.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .tool-card::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.15), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
     }
 
-    .issue-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
+    .tool-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .chips-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
+      margin: 10px 0 6px;
+    }
+
+    @media (max-width: 640px) {
+      .chips-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chip {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      background: rgba(248, 250, 252, 0.88);
+      font-size: 0.9rem;
+      color: #111827;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .chip input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .chip-bullet {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(148, 163, 184, 0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #ffffff;
+    }
+
+    .chip-bullet-inner {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: transparent;
+      transition: background 0.15s ease, transform 0.15s ease;
+      transform: scale(0.3);
+    }
+
+    .chip span {
+      pointer-events: none;
+    }
+
+    .chip.selected {
+      border-color: var(--accent-strong);
+      background: rgba(37, 99, 235, 0.08);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.22);
+    }
+
+    .chip.selected .chip-bullet {
+      border-color: var(--accent-strong);
+    }
+
+    .chip.selected .chip-bullet-inner {
+      background: var(--accent-strong);
+      transform: scale(1);
+    }
+
+    .chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1);
+    }
+
+    .chips-helper {
+      font-size: 0.82rem;
+      color: #4b5563;
       margin-bottom: 10px;
     }
 
-    .issue-title {
-      font-size: 1.1rem;
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .primary-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      background: var(--accent);
+      color: #f9fafb;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .primary-btn:hover {
+      background: var(--accent-strong);
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.55);
+    }
+
+    .primary-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .primary-btn-icon {
+      font-size: 1rem;
+    }
+
+    .secondary-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      padding: 8px 12px;
+      font-size: 0.86rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: #374151;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.12s ease;
+    }
+
+    .secondary-btn:hover {
+      background: #f3f4f6;
+    }
+
+    .mini-note {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .error-text {
+      font-size: 0.82rem;
+      color: #b91c1c;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .error-text.visible {
+      display: block;
+    }
+
+    .results-card {
+      margin-top: 16px;
+      border-radius: 18px;
+      background: var(--card-bg);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      padding: 14px 14px 12px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .results-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 1200px;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .results-title {
+      font-size: 1rem;
       font-weight: 600;
       letter-spacing: -0.01em;
     }
 
-    .issue-tag {
-      font-size: 0.78rem;
-      padding: 3px 9px;
+    .results-tag {
+      font-size: 0.75rem;
+      padding: 2px 8px;
       border-radius: 999px;
       border: 1px solid #e5e7eb;
       background: #f9fafb;
@@ -196,48 +379,112 @@
       white-space: nowrap;
     }
 
-    .issue-section {
-      margin-top: 10px;
-    }
-
-    .issue-section h3 {
+    .results-intro {
       font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #6b7280;
-      margin: 0 0 4px;
-    }
-
-    .issue-section p {
-      margin: 0;
-      font-size: 0.96rem;
+      color: #4b5563;
+      margin: 4px 0 8px;
       line-height: 1.5;
-      color: #111827;
     }
 
-    .issue-section ul {
-      margin: 4px 0 0;
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: #f9fafb;
+      color: #4b5563;
+    }
+
+    .profile-block {
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      padding: 9px 10px 9px;
+      margin-top: 8px;
+    }
+
+    .profile-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .profile-section {
+      margin-top: 6px;
+    }
+
+    .profile-section h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #6b7280;
+      margin: 0 0 2px;
+    }
+
+    .profile-section p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #111827;
+      line-height: 1.5;
+    }
+
+    .profile-section ul {
+      margin: 3px 0 0;
       padding-left: 18px;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       color: #111827;
     }
 
-    .issue-section li + li {
-      margin-top: 2px;
+    .profile-section li + li {
+      margin-top: 1px;
     }
 
     .questions-list li::marker {
       color: var(--accent);
     }
 
-    .footer-note {
-      margin-top: 16px;
+    .results-footer {
+      margin-top: 10px;
       font-size: 0.78rem;
       color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .footer-note a {
-      color: #6b7280;
+    .results-footer span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .results-footer button {
+      font-size: 0.78rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: #4b5563;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .results-footer button:hover {
+      background: #e5e7eb;
+    }
+
+    .results-footer-emoji {
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -246,277 +493,436 @@
     <header>
       <div class="badge">
         <span class="dot" aria-hidden="true"></span>
-        Kommunalvalg - hjælp til at forstå emnerne
+        Kommunalvalg - personlig guide til din hverdag
       </div>
-      <h1 id="page-title">Hvad betyder det egentlig, når de taler om kommunalpolitik?</h1>
+      <h1 id="page-title">Hvad betyder kommunalvalget for dig?</h1>
       <p class="subtitle">
-        Denne side er partipolitisk uafhængig. Den forklarer i klare ord, hvad typiske kommunale emner betyder i praksis,
-        hvad kommunen faktisk bestemmer, og hvilke spørgsmål du kan stille kandidaterne, før du stemmer.
+        I stedet for generelle overskrifter får du her en personlig guide til, hvad kommunalpolitik kan betyde
+        for netop din hverdag. Vælg de ting, der passer på dig, og få forslag til, hvad du skal holde øje med
+        og hvilke spørgsmål du kan stille kandidaterne.
       </p>
     </header>
 
-    <section class="layout">
-      <aside class="side-card" aria-label="Kort om kommunalvalg">
-        <h2>Hvad laver en kommune egentlig?</h2>
+    <section class="layout" aria-label="Værktøj og forklaring">
+      <aside class="info-card" aria-label="Kort om kommunalpolitik">
+        <h2>Kommunalvalg handler om din hverdag</h2>
         <p>
-          Kommunalbestyrelsen beslutter blandt andet rammerne for:
+          Kommunalbestyrelsen bestemmer rammerne for mange af de ting, du møder hver eneste dag:
         </p>
         <ul>
-          <li>Folkeskole, dagtilbud og specialtilbud</li>
-          <li>Ældrepleje, hjemmehjælp og plejehjem</li>
-          <li>Sociale indsatser for udsatte borgere</li>
-          <li>Veje, byudvikling og lokalplaner</li>
-          <li>Lokal natur, miljø og klimaindsatser</li>
-          <li>Kultur, fritidstilbud og idrætsfaciliteter</li>
+          <li>Skoler, daginstitutioner og fritidstilbud</li>
+          <li>Ældrepleje og hjælp i hjemmet</li>
+          <li>Lokal trafik, cykelstier og veje</li>
+          <li>Lokalplaner, byggeri og grønne områder</li>
+          <li>Kultur, idræt og foreningsliv</li>
+          <li>Støtte til borgere, der har det svært</li>
         </ul>
-        <p style="margin-top:8px;">
-          Mange valgudspil blander landspolitik og kommunalpolitik. Brug værktøjet til at se,
-          hvad der faktisk ligger på kommunens bord.
+        <p>
+          Alligevel er det ofte svært at se, hvad valget egentlig betyder for den enkelte. Det prøver dette værktøj
+          at gøre mere konkret.
+        </p>
+        <p class="helper-note">
+          Guiden er generel og partipolitisk uafhængig. Den erstatter ikke lokal journalistik eller officiel information
+          fra din kommune, men kan hjælpe dig med at stille mere præcise spørgsmål.
         </p>
       </aside>
 
-      <section aria-label="Vælg emne og få forklaring">
-        <div class="selector-card">
-          <div class="selector-label">1. Vælg et emne</div>
-          <label for="issue-select" class="visually-hidden">Vælg kommunalt emne</label>
-          <select id="issue-select">
-            <option value="">Vælg et emne fra listen</option>
-            <option value="aeldre">Ældrepleje og hjemmehjælp</option>
-            <option value="skole">Folkeskole og dagtilbud</option>
-            <option value="byudvikling">Byudvikling og lokalplaner</option>
-            <option value="trafik">Kollektiv trafik og lokal infrastruktur</option>
-            <option value="klima">Lokal klima og grøn omstilling</option>
-            <option value="social">Social udsathed og børn unge i mistrivsel</option>
-            <option value="oekonomi">Kommunens økonomi og skat</option>
-          </select>
-          <p class="helper">
-            Du får en kort forklaring, konkrete eksempler og forslag til spørgsmål, du kan stille politikere eller kandidater.
-          </p>
+      <section>
+        <div class="tool-card">
+          <div class="tool-inner">
+            <div class="step-label">Trin 1</div>
+            <div class="step-title">Vælg det, der passer på din hverdag</div>
+            <p class="chips-helper">
+              Vælg gerne flere. Guiden samler det hele til dig.
+            </p>
 
-          <article id="issue-card" class="issue-card" aria-live="polite"></article>
+            <div class="chips-grid" aria-label="Hverdagsforhold" role="group">
+              <label class="chip">
+                <input type="checkbox" value="boernSkole">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg har barn/børn i folkeskole eller kommunal daginstitution</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="aeldrePaaroerende">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg har ældre forældre eller pårørende i kommunen</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="saerligeBehoev">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg har barn/ung med særlige behov eller i mistrivsel</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="brugerKollektiv">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg er afhængig af bus, tog eller anden kollektiv trafik</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="pendlerLangt">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg pendler langt til arbejde eller uddannelse</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="borLandomraade">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg bor i et landområde eller mindre by</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="borTaetBy">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg bor i et tæt område med meget byggeri eller trafik</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="oversvoemmelse">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg bor nær kyst, å eller et område med risiko for oversvømmelse</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="kulturFritid">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg bruger meget kultur, foreningsliv eller idrætsfaciliteter</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" value="ansatKommune">
+                <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
+                <span>Jeg arbejder i kommunen (fx skole, pleje, forvaltning)</span>
+              </label>
+            </div>
 
-          <p class="footer-note">
-            Indholdet er generelt og kan være forskelligt fra kommune til kommune. Tjek altid din egen kommunes hjemmeside,
-            hvis du vil ned i detaljer.
-          </p>
+            <p class="mini-note">
+              Du kan til hver en tid ændre dine valg og få en ny guide.
+            </p>
+
+            <div class="actions-row">
+              <button class="primary-btn" id="generate-btn">
+                <span class="primary-btn-icon">✨</span>
+                <span>Se hvad valget kan betyde for mig</span>
+              </button>
+              <button class="secondary-btn" id="clear-btn" type="button">
+                <span>Ryd valg</span>
+              </button>
+            </div>
+            <p id="error-text" class="error-text">Vælg mindst én ting om din hverdag for at få en personlig guide.</p>
+
+            <div id="results-card" class="results-card" aria-live="polite"></div>
+          </div>
         </div>
       </section>
     </section>
   </main>
 
   <script>
-    const issues = {
-      aeldre: {
-        title: "Ældrepleje og hjemmehjælp",
-        tag: "Kommunen beslutter rammer og serviceniveau",
-        intro: "Når kandidater taler om værdig ældrepleje, handler det om både økonomi, normering, organisering og kvalitet i den hjælp, kommunen giver ældre borgere.",
-        responsibilities: [
-          "Kommunen fastsætter serviceniveauet for hjemmehjælp og plejehjem, fx hvor ofte der kommer hjælp til rengøring, bad og personlig pleje",
-          "Kommunen driver eller indgår aftaler om plejecentre og midlertidige pladser",
-          "Kommunen beslutter organiseringen af hjemmeplejen, fx faste teams, frit valg og brug af private leverandører",
-          "Kommunen sætter rammer for kvalitet, tilsyn og opfølgning på klager"
+    const profiles = {
+      boernSkole: {
+        label: "Børn i folkeskole eller daginstitution",
+        summary: "Kommunalpolitik betyder meget for hverdagen, hvis du har børn i skole eller dagtilbud.",
+        focus: [
+          "skolestruktur, klassestørrelser og normeringer",
+          "kvalitet og åbningstider i daginstitutioner og SFO",
+          "støtte til børn med særlige behov og inklusion i folkeskolen"
         ],
-        practice: [
-          "Ventetid på en plejebolig kan være kort eller lang alt efter kommunens prioriteringer og kapacitet",
-          "Hjemmehjælpen kan have meget lidt tid hos hver borger eller mere tid til nærvær, afhængigt af normeringer og arbejdspres",
-          "Der kan være stor forskel på, om du møder de samme medarbejdere, eller mange skiftende ansigter",
-          "Kommunen kan vælge at styrke forebyggende hjemmebesøg og støtte, så ældre kan klare sig selv længere"
+        changes: [
+          "Skoler kan blive lagt sammen, lukket eller udbygget, hvis kommunen ændrer sin skolestruktur.",
+          "Normeringer og klassestørrelser påvirkes direkte af kommunens budget og prioriteringer.",
+          "Støtte til børn med særlige behov kan blive styrket eller svækket, afhængigt af hvor meget kommunen investerer i tidlig indsats."
         ],
         questions: [
-          "Hvordan vil I konkret måle og følge op på kvaliteten i hjemmeplejen og på plejehjem?",
-          "Vil I prioritere flere medarbejdere nær borgerne, og hvad vil I i givet fald skære ned på for at finansiere det?",
-          "Hvordan sikrer I, at ældre møder så få forskellige medarbejdere som muligt i hverdagen?"
-        ]
-      },
-      skole: {
-        title: "Folkeskole og dagtilbud",
-        tag: "Kommunen er arbejdsgiver og ansvarlig for rammerne",
-        intro: "Når politikere taler om bedre skoler og dagtilbud, handler det i kommunal politik især om normeringer, bygninger, pædagogisk retning og økonomi.",
-        responsibilities: [
-          "Kommunen ejer og driver folkeskoler, SFO og daginstitutioner (børnehaver, vuggestuer) og godkender private tilbud",
-          "Kommunen beslutter lukning, sammenlægning og oprettelse af skoler og institutioner",
-          "Kommunen fastlægger klassestørrelser og normeringer inden for den økonomiske ramme",
-          "Kommunen har ansvar for specialtilbud, inklusion og støtte til børn med særlige behov"
-        ],
-        practice: [
-          "Dit barns skole kan blive lagt sammen med en anden eller få færre klasser, hvis kommunen ændrer sin skolestruktur",
-          "Klassestørrelser og antal voksne i klassen påvirkes direkte af kommunens budgetvalg",
-          "Kvaliteten af bygninger, indeklima og legepladser afhænger af kommunens prioriteringer",
-          "Der kan være stor forskel mellem kommuner på, hvor hurtigt børn med særlige behov får støtte"
-        ],
-        questions: [
-          "Vil I ændre på skolestrukturen i kommunen de næste fire år, og hvad betyder det konkret for mit lokalområde?",
+          "Planlægger I ændringer i skolestruktur eller institutioner i mit lokalområde de næste fire år?",
           "Hvad er jeres mål for klassestørrelser og normeringer, og hvordan vil I følge op på dem?",
-          "Hvordan vil I sikre, at børn med særlige behov får hjælp tidligt nok?"
+          "Hvordan vil I sikre, at børn med særlige behov får hjælp tidligt og ikke skal vente i årevis?"
         ]
       },
-      byudvikling: {
-        title: "Byudvikling og lokalplaner",
-        tag: "Kommunen styrer, hvad der må bygges hvor",
-        intro: "Byudvikling lyder abstrakt, men det handler om meget konkrete ting: hvor der må bygges, hvor højt, hvor tæt og hvad der skal bevares.",
-        responsibilities: [
-          "Kommunen udarbejder lokalplaner, der bestemmer, hvad der må bygges på et område, og hvordan det skal se ud",
-          "Kommunen beslutter, hvor der skal være boliger, erhverv, grønne områder og institutioner",
-          "Kommunen kan stille krav til parkering, fællesarealer, støjafskærmning, beplantning mv.",
-          "Kommunen gennemfører høringer, hvor borgere kan komme med indsigelser og forslag"
+      aeldrePaaroerende: {
+        label: "Ældre pårørende i kommunen",
+        summary: "Hvis du har ældre forældre eller pårørende, er kommunens valg om pleje og hjælp meget mærkbare.",
+        focus: [
+          "serviceniveau for hjemmehjælp og plejehjem",
+          "ventetid på plejeboliger og aflastning",
+          "kvalitet, kontinuitet og tid til omsorg hos personalet"
         ],
-        practice: [
-          "Et grønt område kan blive til et nyt boligbyggeri, hvis kommunen ændrer lokalplanen",
-          "Trafikken i et boligkvarter kan stige markant, hvis der bygges flere boliger uden nye løsninger til vej og parkering",
-          "Historiske bygninger kan bevares eller rives ned som led i en samlet plan",
-          "Din mulighed for at gøre indsigelse i høringsfasen afhænger af, hvor tydeligt og tilgængeligt kommunen informerer"
+        changes: [
+          "Ventetiden på en plejebolig kan ændre sig, hvis kommunen bygger nyt eller nedlægger pladser.",
+          "Tiden hjemmeplejen har hos den enkelte borger, afhænger af normeringer og arbejdspres.",
+          "Kommunen kan vælge modeller, hvor de samme medarbejdere kommer oftere, eller hvor mange forskellige er inde over."
         ],
         questions: [
-          "Hvordan vil I sikre en god balance mellem nye boliger, grønne områder og trafik i vores kommune?",
-          "Hvordan gør I det nemt for helt almindelige borgere at forstå og reagere på lokalplaner?",
-          "Hvilke principper styrer jeres valg, når I skal sige ja eller nej til høj og tæt bebyggelse?"
+          "Hvordan vil I måle og følge op på kvaliteten i hjemmepleje og på plejehjem i praksis?",
+          "Vil I prioritere flere medarbejdere tæt på borgerne, og hvor vil I i givet fald finde pengene?",
+          "Hvordan vil I involvere pårørende i at udvikle og forbedre ældreområdet?"
         ]
       },
-      trafik: {
-        title: "Kollektiv trafik og lokal infrastruktur",
-        tag: "Kommunen planlægger veje, stier og lokal mobilitet",
-        intro: "Kollektiv trafik er ofte et delt ansvar mellem region og kommune, men kommunerne har stor indflydelse på, hvordan hverdagen fungerer for cyklister, bilister og gående.",
-        responsibilities: [
-          "Kommunen vedligeholder kommunale veje, cykelstier og fortove",
-          "Kommunen kan prioritere trafiksikkerhed, hastighedszoner og skoleveje",
-          "Kommunen samarbejder med region og trafikselskab om placering af stoppesteder og linjeføring",
-          "Kommunen kan satse på delebiler, ladepunkter til elbiler og mere plads til cykler"
+      saerligeBehoev: {
+        label: "Barn eller ung med særlige behov",
+        summary: "For børn og unge med særlige behov er kommunens prioriteringer ofte afgørende for, om hverdagen hænger sammen.",
+        focus: [
+          "tidlig indsats i dagtilbud og skole",
+          "tilgang til støtte, PPR og specialtilbud",
+          "samarbejde mellem skole, forvaltning og familie"
         ],
-        practice: [
-          "Der kan komme nye eller tryggere cykelstier, hvis kommunen prioriterer det i anlægsbudgettet",
-          "Buslinjer kan ændres, nedlægges eller styrkes afhængigt af aftaler og kommunale tilskud",
-          "Skoleveje kan blive mere sikre med nedsat hastighed, bump og bedre kryds",
-          "Parkering kan gøres dyrere, billigere eller omlægges for at styre trafikken"
+        changes: [
+          "Ventetid på udredning, støtte og specialtilbud kan forkortes eller forlænges afhængigt af kommunens ressourcer.",
+          "Kommunen kan vælge at styrke lokale inkluderende tilbud eller bygge flere specialklasser og specialskoler.",
+          "Der kan være forskel på, hvor tæt kommunen følger op på indsatser og justerer dem, når noget ikke virker."
         ],
         questions: [
-          "Hvilke konkrete projekter for sikre skoleveje vil I gennemføre i næste valgperiode?",
-          "Hvordan vil I styrke kollektiv trafik og cykling i de områder, hvor det i dag er svært at komme rundt uden bil?",
-          "Hvilke principper bruger I, når I prioriterer mellem vejprojekter, cykelstier og parkeringspladser?"
+          "Hvordan vil I sikre, at børn i mistrivsel bliver opdaget tidligere og får hjælp hurtigere?",
+          "Hvor meget vil I konkret investere i forebyggelse, også selv om gevinsten først kan ses senere?",
+          "Hvordan vil I sikre, at forældre bliver taget alvorligt og inddraget som samarbejdspartnere?"
         ]
       },
-      klima: {
-        title: "Lokal klima og grøn omstilling",
-        tag: "Kommunen omsætter klimaambitioner til lokale valg",
-        intro: "Klimaaftaler laves ofte nationalt og internationalt, men kommunerne afgør meget af det, der kan mærkes lokalt i hverdagen.",
-        responsibilities: [
-          "Kommunen kan stille klimakrav i lokalplaner og til nye byggerier",
-          "Kommunen kan planlægge energirenovering af egne bygninger, fx skoler og plejecentre",
-          "Kommunen har indflydelse på affaldssortering, genbrug og genanvendelse",
-          "Kommunen kan beskytte mod oversvømmelse, fx med klimatilpasning langs kyster og vandløb"
+      brugerKollektiv: {
+        label: "Afhængig af kollektiv trafik",
+        summary: "Hvis du er afhængig af bus, tog eller lokal letbane, er kommunens aftaler og prioriteringer vigtige.",
+        focus: [
+          "hyppighed og linjeføring på lokale busruter",
+          "sammenhæng mellem stoppesteder, skoler, arbejde og indkøb",
+          "tryghed og tilgængelighed ved stoppesteder"
         ],
-        practice: [
-          "Nye boligkvarterer kan få krav om grønne områder, regnvandshåndtering og energivenlige løsninger",
-          "Din hverdag kan påvirkes af ændret affaldssortering og nye ordninger for genbrug",
-          "Kommunen kan vælge at gøre det lettere at vælge cykel, bus eller elbil frem for benzinbil",
-          "Udvikling i områder, der er udsatte for oversvømmelse, kan begrænses eller kræve særlige løsninger"
+        changes: [
+          "Buslinjer kan styrkes, lægges om eller nedlægges, hvis kommunen ændrer sine aftaler og tilskud.",
+          "Afstand til stoppesteder og ventetid kan ændre sig, når kommunen prioriterer vejprojekter og nye byområder.",
+          "Kommunen kan forbedre tryghed ved stoppesteder med belysning, opholdspladser og bedre krydsninger."
         ],
         questions: [
-          "Hvad er de tre vigtigste klimaindsatser, I vil gennemføre lokalt de næste fire år?",
-          "Hvordan afvejer I klimaindsatser over for andre hensyn, fx økonomi eller kortsigtet bekvemmelighed?",
-          "Hvordan vil I gøre det nemt for borgere og lokale virksomheder at bidrage til den grønne omstilling?"
+          "Hvilke konkrete ændringer i den lokale kollektive trafik ser I for jer de næste fire år?",
+          "Hvordan vil I sikre, at det er muligt at komme til uddannelse, arbejde og fritidstilbud uden bil?",
+          "Hvordan vægter I kollektiv trafik i landdistrikter i forhold til tætte byområder?"
         ]
       },
-      social: {
-        title: "Social udsathed og børn unge i mistrivsel",
-        tag: "Kommunen har ansvar for støtte og forebyggelse",
-        intro: "Socialpolitik i kommunen handler både om forebyggelse og om støtte til mennesker, der har det svært - fx børn i mistrivsel, hjemløse eller borgere med psykiske udfordringer.",
-        responsibilities: [
-          "Kommunen har ansvar for børn og unge, der mistrives, og kan sætte ind med støtte i skole, dagtilbud og familie",
-          "Kommunen driver tilbud til udsatte grupper, fx væresteder, herberger og misbrugsbehandling",
-          "Kommunen træffer afgørelser om anbringelser af børn og unge",
-          "Kommunen samarbejder med region og andre myndigheder om psykisk sygdom og komplekse forløb"
+      pendlerLangt: {
+        label: "Lang pendling til arbejde eller uddannelse",
+        summary: "Lang pendling gør dig ekstra sårbar over for ændringer i trafik, parkering og kollektiv trafik.",
+        focus: [
+          "parkeringsmuligheder ved stationer og knudepunkter",
+          "sammenhæng mellem lokal trafik og regional trafik",
+          "trafiksikkerhed på indfaldsveje og cykelruter"
         ],
-        practice: [
-          "Nogle kommuner investerer mere i tidlig indsats, så problemer opdages og håndteres før de vokser sig store",
-          "Ventetid på støtte og hjælp kan være kort eller lang afhængigt af prioritering og ressourcer",
-          "Der kan være forskel på, hvor hurtigt skoler og dagtilbud får hjælp fra PPR og socialforvaltning",
-          "Kommunen kan vælge at styrke lokale tilbud, hvor borgere kan få rådgivning uden lang sagsgang"
+        changes: [
+          "Parkeringsforhold ved stationer kan strammes eller forbedres, alt efter kommunens prioriteringer.",
+          "Nye vejprojekter eller ændret trafikafvikling kan påvirke din daglige rejsetid markant.",
+          "Cykelstier og sikre ruter til stationer kan enten opgraderes eller nedprioriteres."
         ],
         questions: [
-          "Hvordan vil I sikre, at børn i mistrivsel bliver opdaget tidligere, og at hjælpen kommer hurtigere?",
-          "Hvor meget vil I investere i forebyggelse, selv om gevinsten først kommer senere?",
-          "Hvordan vil I lytte til erfaringer fra borgere, der selv har været i kontakt med systemet?"
+          "Hvordan vil I gøre det lettere at kombinere cykel, bil og kollektiv trafik i hverdagen?",
+          "Har I konkrete planer for bedre adgang til stationer og knudepunkter i vores område?",
+          "Hvordan vejer I pendleres hverdag ind, når I prioriterer trafikinvesteringer?"
         ]
       },
-      oekonomi: {
-        title: "Kommunens økonomi og skat",
-        tag: "Kommunen prioriterer mellem velfærd, anlæg og skat",
-        intro: "Når kandidater taler om ansvarlig økonomi, handler det i praksis om, hvordan pengene fordeles mellem velfærdsområder, byggeri og eventuelle skattelettelser eller skatteforhøjelser.",
-        responsibilities: [
-          "Kommunalbestyrelsen vedtager hvert år budget og skatteprocent",
-          "Kommunen prioriterer, hvor meget der skal bruges på ældre, skole, socialområdet, kultur mv.",
-          "Kommunen beslutter større anlægsprojekter, fx nye skoler, veje eller idrætsanlæg",
-          "Kommunen er underlagt regler for økonomi og tilsyn, men har stadig betydelig frihed til at vælge niveau"
+      borLandomraade: {
+        label: "Bopæl i landområde eller mindre by",
+        summary: "For borgere i landområder betyder kommunens prioriteringer ofte forskellen på liv i lokalsamfundet eller langsom udtynding.",
+        focus: [
+          "nærhed til skole, dagtilbud og indkøb",
+          "kollektiv trafik, skolebus og flextrafik",
+          "lokale mødesteder, idræt og foreningsliv"
         ],
-        practice: [
-          "Et løfte om ikke at hæve skatten kan betyde, at der er mindre plads til nye velfærdsforbedringer",
-          "Store anlægsprojekter kan tage midler fra driften på kort sigt eller kræve besparelser andre steder",
-          "Små ændringer i budgettet kan mærkes tydeligt i hverdagen, fx færre voksne i dagtilbud eller strammere visitering",
-          "Kommuner med stram økonomi kan være nødt til at spare, også selv om der politisk er vilje til at gøre mere"
+        changes: [
+          "Lukning eller sammenlægning af skoler og institutioner rammer ofte mindre byer først.",
+          "Hvis busruter ændres eller forsvinder, kan det blive svært for unge og ældre at komme rundt.",
+          "Kommunen kan vælge at investere i lokale mødesteder, kulturhuse og idrætsfaciliteter eller samle det centralt."
         ],
         questions: [
-          "Hvis I lover at forbedre et område, hvor vil I så konkret finde pengene?",
-          "Er I åbne for at hæve eller sænke skatten, og hvad skal der i givet fald til for, at I vil gøre det?",
-          "Hvilke tre ting vil I under ingen omstændigheder spare på i den kommende valgperiode?"
+          "Hvilke konkrete løfter kan I give om skoler, dagtilbud og fritidstilbud i landdistrikterne?",
+          "Hvordan vil I sikre, at ældre og unge i landområder ikke bliver afhængige af bil for at kunne deltage i hverdagslivet?",
+          "Hvad er jeres langsigtede plan for udvikling af landsbyer og mindre byer i kommunen?"
+        ]
+      },
+      borTaetBy: {
+        label: "Bopæl i tæt byområde",
+        summary: "I tætte byområder er byudvikling, trafik og støj ofte centrale spørgsmål.",
+        focus: [
+          "lokalplaner, byggehøjde og tæthed",
+          "trafik, parkering og støj",
+          "adgang til grønne områder og byrum"
+        ],
+        changes: [
+          "Nye lokalplaner kan betyde mere byggeri, flere beboere og mere trafik tæt på dig.",
+          "Kommunen kan ændre parkeringsregler, ensrette gader eller lave nye cykelstier.",
+          "Grønne lommer, legepladser og små byrum kan prioriteres eller forsvinde i nye projekter."
+        ],
+        questions: [
+          "Hvilke principper styrer jeres beslutninger om tæt byggeri i vores kvarter?",
+          "Hvordan vil I sikre rolige, grønne lommer i området, hvis der kommer flere boliger og mere trafik?",
+          "Hvordan inddrager I beboere tidligt, før store forandringer besluttes?"
+        ]
+      },
+      oversvoemmelse: {
+        label: "Risiko for oversvømmelse",
+        summary: "Hvis du bor nær vand eller lavtliggende områder, er klimatilpasning et meget konkret spørgsmål.",
+        focus: [
+          "kommunens klimatilpasningsplaner og investeringer",
+          "krav til byggeri og sikring i udsatte områder",
+          "beredskab og information til borgere"
+        ],
+        changes: [
+          "Kommunen kan vælge at investere i diger, bassiner, regnvandsløsninger og anden beskyttelse.",
+          "Der kan komme skærpede krav til byggeri og kældre i udsatte områder.",
+          "Nogle områder kan blive fravalgt til yderligere udvikling af hensyn til risikoen."
+        ],
+        questions: [
+          "Hvilke konkrete klimatilpasningsprojekter har I planlagt i de mest udsatte områder?",
+          "Hvordan vil I informere og involvere borgere, der bor i risikoområder?",
+          "Hvordan afvejer I hensynet til udvikling mod risikoen for oversvømmelse?"
+        ]
+      },
+      kulturFritid: {
+        label: "Aktiv i kultur og foreningsliv",
+        summary: "Hvis du bruger foreninger, idræt og kulturtilbud, er kommunens prioriteringer tydelige i din fritid.",
+        focus: [
+          "tilskud til foreninger og kulturinstitutioner",
+          "vedligeholdelse og udvikling af haller, baner og scener",
+          "adgang til faciliteter på tværs af alder og økonomi"
+        ],
+        changes: [
+          "Tilskud til foreninger kan styrkes eller skæres, hvilket påvirker kontingenter og aktiviteter.",
+          "Kommunen kan investere i nye faciliteter eller lade eksisterende haller, baner og scener slide.",
+          "Valget af hvilke målgrupper der prioriteres, kan forme fritidstilbuddene mange år frem."
+        ],
+        questions: [
+          "Hvilken rolle mener I, at foreningsliv og kultur skal spille i vores kommune de næste år?",
+          "Hvordan vil I sikre, at børn og unge med begrænset økonomi også kan deltage i fritidstilbud?",
+          "Hvilke konkrete faciliteter eller tilbud vil I styrke først, hvis I får muligheden?"
+        ]
+      },
+      ansatKommune: {
+        label: "Ansat i kommunen",
+        summary: "Hvis du arbejder i kommunen, mærker du direkte konsekvenserne af politiske beslutninger om økonomi, arbejdsmiljø og organisering.",
+        focus: [
+          "normeringer og arbejdspres i hverdagen",
+          "indflydelse på faglighed og udvikling",
+          "stabilitet i ledelse og organisering"
+        ],
+        changes: [
+          "Besparelser eller omprioriteringer kan føre til færre kolleger og mere pres i hverdagen.",
+          "Kommunen kan vælge at give mere tid til faglig udvikling og samarbejde eller at stramme skemaer og minutstyring.",
+          "Hyppige omorganiseringer kan skabe utryghed, mens langsigtede planer kan give mere ro."
+        ],
+        questions: [
+          "Hvordan vil I sikre, at der er sammenhæng mellem politiske ambitioner og hverdagen for medarbejderne?",
+          "Hvad vil I gøre for at fastholde og rekruttere medarbejdere på fx skole, ældre og socialområdet?",
+          "Hvordan vil I lytte til medarbejdernes erfaringer, før I ændrer strukturer og organisering?"
         ]
       }
     };
 
-    const issueSelect = document.getElementById("issue-select");
-    const issueCard = document.getElementById("issue-card");
+    const chips = Array.from(document.querySelectorAll(".chip"));
+    const generateBtn = document.getElementById("generate-btn");
+    const clearBtn = document.getElementById("clear-btn");
+    const errorText = document.getElementById("error-text");
+    const resultsCard = document.getElementById("results-card");
 
-    function renderIssue(key) {
-      const issue = issues[key];
-      if (!issue) {
-        issueCard.classList.remove("visible");
-        issueCard.innerHTML = "";
+    chips.forEach(chip => {
+      chip.addEventListener("click", (e) => {
+        // undgå dobbelt toggle hvis man rammer input
+        if (e.target.tagName.toLowerCase() === "input") return;
+        chip.classList.toggle("selected");
+        const input = chip.querySelector("input");
+        input.checked = chip.classList.contains("selected");
+      });
+    });
+
+    clearBtn.addEventListener("click", () => {
+      chips.forEach(chip => {
+        chip.classList.remove("selected");
+        chip.querySelector("input").checked = false;
+      });
+      resultsCard.classList.remove("visible");
+      resultsCard.innerHTML = "";
+      errorText.classList.remove("visible");
+    });
+
+    generateBtn.addEventListener("click", () => {
+      const selectedKeys = chips
+        .filter(chip => chip.classList.contains("selected"))
+        .map(chip => chip.querySelector("input").value);
+
+      if (!selectedKeys.length) {
+        errorText.classList.add("visible");
+        resultsCard.classList.remove("visible");
+        resultsCard.innerHTML = "";
+        return;
+      }
+      errorText.classList.remove("visible");
+      renderResults(selectedKeys);
+    });
+
+    function renderResults(selectedKeys) {
+      const selectedProfiles = selectedKeys
+        .map(key => profiles[key])
+        .filter(Boolean);
+
+      if (!selectedProfiles.length) {
+        resultsCard.classList.remove("visible");
+        resultsCard.innerHTML = "";
         return;
       }
 
-      const responsibilitiesList = issue.responsibilities
-        .map(item => `<li>${item}</li>`)
-        .join("");
+      const countText = selectedProfiles.length === 1
+        ? "1 valgt forhold i din hverdag"
+        : `${selectedProfiles.length} valgte forhold i din hverdag`;
 
-      const practiceList = issue.practice
-        .map(item => `<li>${item}</li>`)
-        .join("");
+      const allFocus = [];
+      selectedProfiles.forEach(p => allFocus.push(...p.focus));
+      const uniqueFocus = Array.from(new Set(allFocus));
+      const topFocus = uniqueFocus.slice(0, 4);
 
-      const questionsList = issue.questions
-        .map(item => `<li>${item}</li>`)
-        .join("");
+      const introText = selectedProfiles.length === 1
+        ? "På baggrund af dit valg får du her en kort guide til, hvad der især er værd at holde øje med i kommunalpolitikken."
+        : "På baggrund af dine valg får du her en samlet guide til, hvad der især er værd at holde øje med i kommunalpolitikken.";
 
-      issueCard.innerHTML = `
-        <div class="issue-header">
-          <div class="issue-title">${issue.title}</div>
-          <div class="issue-tag">${issue.tag}</div>
+      const pillHtml = topFocus.map(f => `<span class="pill">${f}</span>`).join("");
+
+      const blocksHtml = selectedProfiles.map(profile => {
+        const changesList = profile.changes.map(item => `<li>${item}</li>`).join("");
+        const questionsList = profile.questions.map(item => `<li>${item}</li>`).join("");
+        return `
+          <section class="profile-block">
+            <div class="profile-title">${profile.label}</div>
+            <div class="profile-section">
+              <h3>Hvorfor det betyder noget</h3>
+              <p>${profile.summary}</p>
+            </div>
+            <div class="profile-section">
+              <h3>Hvad kan ændre sig de næste fire år?</h3>
+              <ul>${changesList}</ul>
+            </div>
+            <div class="profile-section">
+              <h3>Gode spørgsmål til kandidater eller partier</h3>
+              <ul class="questions-list">${questionsList}</ul>
+            </div>
+          </section>
+        `;
+      }).join("");
+
+      resultsCard.innerHTML = `
+        <div class="results-header">
+          <div class="results-title">Din personlige valgguide</div>
+          <div class="results-tag">${countText}</div>
         </div>
-        <div class="issue-section">
-          <h3>Kort fortalt</h3>
-          <p>${issue.intro}</p>
+        <p class="results-intro">
+          Guiden er tænkt som en støtte, når du læser valgmateriale, følger med i lokal journalistik
+          eller møder kandidaterne. Brug gerne spørgsmålene som udgangspunkt for dine egne.
+        </p>
+        <div class="pill-row">
+          ${pillHtml}
         </div>
-        <div class="issue-section">
-          <h3>Hvad bestemmer kommunen?</h3>
-          <ul>${responsibilitiesList}</ul>
-        </div>
-        <div class="issue-section">
-          <h3>Hvad kan det betyde i praksis?</h3>
-          <ul>${practiceList}</ul>
-        </div>
-        <div class="issue-section">
-          <h3>Spørgsmål du kan stille kandidaterne</h3>
-          <ul class="questions-list">${questionsList}</ul>
+        ${blocksHtml}
+        <div class="results-footer">
+          <span>
+            <span class="results-footer-emoji">💡</span>
+            <span>Tag gerne et skærmbillede eller noter dine vigtigste spørgsmål, før du går i stemmeboksen.</span>
+          </span>
+          <button type="button" onclick="window.print()">
+            <span class="results-footer-emoji">🖨️</span>
+            <span>Print eller gem som PDF</span>
+          </button>
         </div>
       `;
 
-      // lille fade in
       requestAnimationFrame(() => {
-        issueCard.classList.add("visible");
+        resultsCard.classList.add("visible");
       });
     }
-
-    issueSelect.addEventListener("change", (e) => {
-      renderIssue(e.target.value);
-    });
   </script>
 </body>
 </html>
