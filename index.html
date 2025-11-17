@@ -2,21 +2,22 @@
 <html lang="da">
 <head>
   <meta charset="utf-8">
-  <title>Hvad betyder kommunalvalget for dig?</title>
+  <title>Hvad betyder kommunalvalget for din unge?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="En neutral, personlig guide til hvad kommunalvalget kan betyde for din hverdag.">
+  <meta name="description" content="Et enkelt samtaleværktøj til forældre, der vil vise deres unge, hvad kommunalvalget betyder for deres hverdag.">
   <style>
     :root {
-      --bg: #f3f4ff;
+      --bg: #e0ecff;
+      --bg-soft: #f3f4ff;
       --card-bg: #ffffff;
       --accent: #2563eb;
-      --accent-soft: #e0ebff;
       --accent-strong: #1d4ed8;
+      --accent-soft: #e0ecff;
       --text-main: #0f172a;
       --text-muted: #6b7280;
       --border-soft: #e5e7eb;
       --radius-lg: 18px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.14);
     }
 
     * {
@@ -30,11 +31,30 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #dbeafe 0, #eef2ff 40%, #f9fafb 100%);
+      background: radial-gradient(circle at top, #dbeafe 0, #eef2ff 45%, #f9fafb 100%);
       color: var(--text-main);
       display: flex;
       justify-content: center;
       padding: 18px;
+    }
+
+    body.screenshot-mode {
+      background: #ffffff;
+      padding: 10px;
+    }
+
+    body.screenshot-mode .badge,
+    body.screenshot-mode .helper-note,
+    body.screenshot-mode .screenshot-toggle {
+      display: none;
+    }
+
+    body.screenshot-mode .info-card,
+    body.screenshot-mode .tool-card,
+    body.screenshot-mode .results-card {
+      box-shadow: none;
+      border-color: #d1d5db;
+      background: #ffffff;
     }
 
     .page {
@@ -73,15 +93,15 @@
     }
 
     .subtitle {
-      max-width: 680px;
+      max-width: 720px;
       color: var(--text-muted);
       font-size: 0.98rem;
-      line-height: 1.55;
+      line-height: 1.6;
       margin: 0;
     }
 
     .layout {
-      margin-top: 10px;
+      margin-top: 14px;
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
       gap: 22px;
@@ -101,8 +121,8 @@
       background: rgba(255, 255, 255, 0.94);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-soft);
-      padding: 16px 18px 16px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+      padding: 16px 18px 12px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
       backdrop-filter: blur(16px);
       font-size: 0.93rem;
       color: var(--text-muted);
@@ -134,8 +154,65 @@
       margin-top: 8px;
     }
 
+    .viz-row {
+      margin-top: 10px;
+      padding: 10px 10px 8px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    .viz-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .viz-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .viz-group-label {
+      font-size: 0.8rem;
+      color: #4b5563;
+      margin-bottom: 2px;
+    }
+
+    .viz-icons {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 3px;
+    }
+
+    .viz-person {
+      width: 12px;
+      height: 18px;
+      border-radius: 4px;
+      background: #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .viz-person.filled {
+      background: #2563eb;
+    }
+
+    .viz-person.faded {
+      opacity: 0.4;
+    }
+
+    .viz-footnote {
+      margin-top: 4px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
     .tool-card {
-      background: linear-gradient(145deg, #ffffff 0, #f4f5ff 45%, #e0ebff 100%);
+      background: linear-gradient(145deg, #ffffff 0, #f4f5ff 45%, #e0ecff 100%);
       border-radius: 26px;
       padding: 18px 18px 16px;
       border: 1px solid rgba(148, 163, 184, 0.45);
@@ -149,7 +226,7 @@
       position: absolute;
       inset: -60%;
       background:
-        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.12), transparent 55%),
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.15), transparent 55%),
         radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.15), transparent 55%);
       opacity: 0.9;
       pointer-events: none;
@@ -175,6 +252,12 @@
       letter-spacing: -0.01em;
     }
 
+    .step-text {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin: 0 0 8px;
+    }
+
     .chips-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -196,7 +279,7 @@
       padding: 9px 11px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.75);
-      background: rgba(248, 250, 252, 0.88);
+      background: rgba(248, 250, 252, 0.9);
       font-size: 0.9rem;
       color: #111827;
       cursor: pointer;
@@ -255,10 +338,10 @@
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1);
     }
 
-    .chips-helper {
-      font-size: 0.82rem;
+    .mini-note {
+      font-size: 0.8rem;
       color: #4b5563;
-      margin-bottom: 10px;
+      margin-top: 4px;
     }
 
     .actions-row {
@@ -266,7 +349,7 @@
       flex-wrap: wrap;
       gap: 8px;
       align-items: center;
-      margin-top: 4px;
+      margin-top: 10px;
     }
 
     .primary-btn {
@@ -300,7 +383,8 @@
       font-size: 1rem;
     }
 
-    .secondary-btn {
+    .secondary-btn,
+    .screenshot-toggle {
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.9);
       padding: 8px 12px;
@@ -314,14 +398,9 @@
       transition: all 0.12s ease;
     }
 
-    .secondary-btn:hover {
+    .secondary-btn:hover,
+    .screenshot-toggle:hover {
       background: #f3f4f6;
-    }
-
-    .mini-note {
-      font-size: 0.78rem;
-      color: #6b7280;
-      margin-top: 2px;
     }
 
     .error-text {
@@ -344,7 +423,7 @@
       box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
       opacity: 0;
       transform: translateY(6px);
-      transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+      transition: opacity 0.18s ease-out, transform 0.18s ease-out, max-height 0.25s ease-out;
       max-height: 0;
       overflow: hidden;
     }
@@ -390,7 +469,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .pill {
@@ -450,6 +529,19 @@
       color: var(--accent);
     }
 
+    .to-you {
+      margin-top: 6px;
+      padding-top: 4px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.86rem;
+      color: #374151;
+    }
+
+    .to-you span {
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
     .results-footer {
       margin-top: 10px;
       font-size: 0.78rem;
@@ -458,6 +550,7 @@
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .results-footer span {
@@ -486,6 +579,20 @@
     .results-footer-emoji {
       font-size: 1rem;
     }
+
+    .screenshot-toggle {
+      margin-left: auto;
+    }
+
+    @media (max-width: 640px) {
+      .results-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .screenshot-toggle {
+        margin-left: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -493,116 +600,153 @@
     <header>
       <div class="badge">
         <span class="dot" aria-hidden="true"></span>
-        Kommunalvalg - personlig guide til din hverdag
+        Kommunalvalg - samtaleværktøj til forældre og unge
       </div>
-      <h1 id="page-title">Hvad betyder kommunalvalget for dig?</h1>
+      <h1 id="page-title">Hvad betyder kommunalvalget for din unge?</h1>
       <p class="subtitle">
-        I stedet for generelle overskrifter får du her en personlig guide til, hvad kommunalpolitik kan betyde
-        for netop din hverdag. Vælg de ting, der passer på dig, og få forslag til, hvad du skal holde øje med
-        og hvilke spørgsmål du kan stille kandidaterne.
+        Her kan du på to minutter få en personlig guide til, hvad kommunalvalget betyder for din søns eller datters hverdag.
+        Vælg det, der passer på deres liv nu, og få konkrete vinkler og spørgsmål, I kan bruge i en kort snak hjemme ved bordet
+        eller på en gåtur.
       </p>
     </header>
 
-    <section class="layout" aria-label="Værktøj og forklaring">
-      <aside class="info-card" aria-label="Kort om kommunalpolitik">
-        <h2>Kommunalvalg handler om din hverdag</h2>
+    <section class="layout" aria-label="Forklaring og værktøj">
+      <aside class="info-card" aria-label="Kort om unges stemmer">
+        <h2>Når de unge bliver væk, ændrer det balancen</h2>
         <p>
-          Kommunalbestyrelsen bestemmer rammerne for mange af de ting, du møder hver eneste dag:
+          Ved kommunalvalg stemmer langt færre unge end ældre. Det betyder, at beslutninger om byliv,
+          bolig, transport og fællesskaber træffes med meget lille vægt fra dem, der faktisk skal leve længst med dem.
         </p>
-        <ul>
-          <li>Skoler, daginstitutioner og fritidstilbud</li>
-          <li>Ældrepleje og hjælp i hjemmet</li>
-          <li>Lokal trafik, cykelstier og veje</li>
-          <li>Lokalplaner, byggeri og grønne områder</li>
-          <li>Kultur, idræt og foreningsliv</li>
-          <li>Støtte til borgere, der har det svært</li>
-        </ul>
+
+        <div class="viz-row" aria-label="Forenklet illustration af forskel i valgdeltagelse">
+          <div class="viz-title">Forenklet billede af stemmedeltagelse</div>
+          <div class="viz-groups">
+            <div>
+              <div class="viz-group-label">Unge 18-29 år - cirka halvdelen stemmer</div>
+              <div class="viz-icons" aria-hidden="true">
+                <!-- 5 udfyldte, 5 tomme -->
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person faded"></span>
+                <span class="viz-person faded"></span>
+                <span class="viz-person faded"></span>
+                <span class="viz-person faded"></span>
+                <span class="viz-person faded"></span>
+              </div>
+            </div>
+            <div>
+              <div class="viz-group-label">Ældre 70 plus - langt de fleste stemmer</div>
+              <div class="viz-icons" aria-hidden="true">
+                <!-- 8 udfyldte, 2 tomme -->
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person filled"></span>
+                <span class="viz-person faded"></span>
+                <span class="viz-person faded"></span>
+              </div>
+            </div>
+          </div>
+          <p class="viz-footnote">
+            Tallene er afrundede og varierer fra valg til valg. Pointen er, at unge generelt er underrepræsenterede.
+          </p>
+        </div>
+
         <p>
-          Alligevel er det ofte svært at se, hvad valget egentlig betyder for den enkelte. Det prøver dette værktøj
-          at gøre mere konkret.
+          Den korte version: Hvis din unge ikke stemmer, fylder andres ønsker mere, når byrådet beslutter,
+          hvordan kommunen skal være at være ung i.
         </p>
         <p class="helper-note">
-          Guiden er generel og partipolitisk uafhængig. Den erstatter ikke lokal journalistik eller officiel information
-          fra din kommune, men kan hjælpe dig med at stille mere præcise spørgsmål.
+          Denne side er partipolitisk uafhængig. Brug den som afsæt for en rolig snak. Ikke som løftet pegefinger.
         </p>
       </aside>
 
-      <section>
+      <section aria-label="Samtaleværktøj">
         <div class="tool-card">
           <div class="tool-inner">
             <div class="step-label">Trin 1</div>
-            <div class="step-title">Vælg det, der passer på din hverdag</div>
-            <p class="chips-helper">
-              Vælg gerne flere. Guiden samler det hele til dig.
+            <div class="step-title">Vælg hvad der ligner din unge</div>
+            <p class="step-text">
+              Sæt kryds ved 2 til 4 udsagn, der passer bedst. Så samler vi en lille personlig valgguide, I kan tale ud fra.
             </p>
 
-            <div class="chips-grid" aria-label="Hverdagsforhold" role="group">
+            <div class="chips-grid" aria-label="Livssituation" role="group">
               <label class="chip">
-                <input type="checkbox" value="boernSkole">
+                <input type="checkbox" value="lejebolig">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg har barn/børn i folkeskole eller kommunal daginstitution</span>
+                <span>Bor til leje og synes huslejen fylder meget</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="aeldrePaaroerende">
+                <input type="checkbox" value="studerende">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg har ældre forældre eller pårørende i kommunen</span>
+                <span>Er studerende eller i gang med en erhvervsuddannelse</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="saerligeBehoev">
+                <input type="checkbox" value="arbejdeKommune">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg har barn/ung med særlige behov eller i mistrivsel</span>
+                <span>Arbejder i kommunen (butik, café, pleje, pædagogmedhjælper osv.)</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="brugerKollektiv">
+                <input type="checkbox" value="kollektiv">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg er afhængig af bus, tog eller anden kollektiv trafik</span>
+                <span>Bruger bus, tog eller natbus flere gange om ugen</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="pendlerLangt">
+                <input type="checkbox" value="klima">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg pendler langt til arbejde eller uddannelse</span>
+                <span>Går meget op i klima, grøn by og natur</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="borLandomraade">
+                <input type="checkbox" value="mental">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg bor i et landområde eller mindre by</span>
+                <span>Har selv eller i vennekredsen udfordringer med mental trivsel</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="borTaetBy">
+                <input type="checkbox" value="kultur">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg bor i et tæt område med meget byggeri eller trafik</span>
+                <span>Bruger byens natteliv, kulturtilbud eller idræt</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="oversvoemmelse">
+                <input type="checkbox" value="flytte">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg bor nær kyst, å eller et område med risiko for oversvømmelse</span>
+                <span>Overvejer at flytte fra kommunen inden for få år</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="kulturFritid">
+                <input type="checkbox" value="borHjemme">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg bruger meget kultur, foreningsliv eller idrætsfaciliteter</span>
+                <span>Bor hjemme hos jer og er på vej videre i livet</span>
               </label>
               <label class="chip">
-                <input type="checkbox" value="ansatKommune">
+                <input type="checkbox" value="jobUsikker">
                 <span class="chip-bullet"><span class="chip-bullet-inner"></span></span>
-                <span>Jeg arbejder i kommunen (fx skole, pleje, forvaltning)</span>
+                <span>Har korte ansættelser, studiejob eller usikker tilknytning til arbejdsmarkedet</span>
               </label>
             </div>
 
             <p class="mini-note">
-              Du kan til hver en tid ændre dine valg og få en ny guide.
+              Det behøver ikke være perfekt. Det vigtigste er, at det føles nogenlunde rigtigt.
             </p>
 
             <div class="actions-row">
-              <button class="primary-btn" id="generate-btn">
+              <button class="primary-btn" id="generate-btn" type="button">
                 <span class="primary-btn-icon">✨</span>
-                <span>Se hvad valget kan betyde for mig</span>
+                <span>Lav en personlig valgguide</span>
               </button>
               <button class="secondary-btn" id="clear-btn" type="button">
                 <span>Ryd valg</span>
               </button>
+              <button class="screenshot-toggle" id="screenshot-toggle" type="button">
+                <span>Skærmvenlig visning til dit barn</span>
+              </button>
             </div>
-            <p id="error-text" class="error-text">Vælg mindst én ting om din hverdag for at få en personlig guide.</p>
+            <p id="error-text" class="error-text">Vælg mindst ét udsagn for at få en personlig guide.</p>
 
             <div id="results-card" class="results-card" aria-live="polite"></div>
           </div>
@@ -613,207 +757,207 @@
 
   <script>
     const profiles = {
-      boernSkole: {
-        label: "Børn i folkeskole eller daginstitution",
-        summary: "Kommunalpolitik betyder meget for hverdagen, hvis du har børn i skole eller dagtilbud.",
+      lejebolig: {
+        label: "Bor til leje og synes huslejen fylder meget",
         focus: [
-          "skolestruktur, klassestørrelser og normeringer",
-          "kvalitet og åbningstider i daginstitutioner og SFO",
-          "støtte til børn med særlige behov og inklusion i folkeskolen"
+          "hvor der bliver bygget boliger til unge og små husstande",
+          "om nye områder bliver meget dyre eller mere blandede",
+          "om der er krav om almene eller billige boliger i nye projekter"
         ],
         changes: [
-          "Skoler kan blive lagt sammen, lukket eller udbygget, hvis kommunen ændrer sin skolestruktur.",
-          "Normeringer og klassestørrelser påvirkes direkte af kommunens budget og prioriteringer.",
-          "Støtte til børn med særlige behov kan blive styrket eller svækket, afhængigt af hvor meget kommunen investerer i tidlig indsats."
+          "Kommunen kan godkende lokalplaner, der øger eller begrænser antallet af mindre boliger i byen.",
+          "Der kan komme flere almene boliger eller flere luksuslejligheder alt efter politiske valg.",
+          "Hvis der ikke bygges til unge og mindre husstande, kan det blive svært at blive boende efter studie og første job."
         ],
         questions: [
-          "Planlægger I ændringer i skolestruktur eller institutioner i mit lokalområde de næste fire år?",
-          "Hvad er jeres mål for klassestørrelser og normeringer, og hvordan vil I følge op på dem?",
-          "Hvordan vil I sikre, at børn med særlige behov får hjælp tidligt og ikke skal vente i årevis?"
-        ]
+          "Hvilken plan har I for billige og mellemstore lejeboliger til unge i vores kommune de næste fire år?",
+          "Stiller I krav om almene boliger, når der bygges nyt i attraktive områder?",
+          "Hvordan undgår vi, at unge og studerende presses helt ud af bymidten?"
+        ],
+        toYoung: "Hvis du aldrig stemmer, vælger andre, om der overhovedet er boliger i byen, som du har råd til at bo i."
       },
-      aeldrePaaroerende: {
-        label: "Ældre pårørende i kommunen",
-        summary: "Hvis du har ældre forældre eller pårørende, er kommunens valg om pleje og hjælp meget mærkbare.",
+      studerende: {
+        label: "Studerende eller i gang med erhvervsuddannelse",
         focus: [
-          "serviceniveau for hjemmehjælp og plejehjem",
-          "ventetid på plejeboliger og aflastning",
-          "kvalitet, kontinuitet og tid til omsorg hos personalet"
+          "transport til uddannelsesstedet",
+          "studiepladser, gruppearbejdspladser og faciliteter",
+          "muligheder for studiejobs og praktik lokalt"
         ],
         changes: [
-          "Ventetiden på en plejebolig kan ændre sig, hvis kommunen bygger nyt eller nedlægger pladser.",
-          "Tiden hjemmeplejen har hos den enkelte borger, afhænger af normeringer og arbejdspres.",
-          "Kommunen kan vælge modeller, hvor de samme medarbejdere kommer oftere, eller hvor mange forskellige er inde over."
+          "Buslinjer og cykelstier til uddannelsessteder kan styrkes eller nedprioriteres.",
+          "Kommunen kan skabe eller fjerne studiemiljøer i biblioteker, kulturhuse og andre fællesrum.",
+          "Samarbejdet mellem kommune og lokale virksomheder kan påvirke udbuddet af praktikpladser og studiejobs."
         ],
         questions: [
-          "Hvordan vil I måle og følge op på kvaliteten i hjemmepleje og på plejehjem i praksis?",
-          "Vil I prioritere flere medarbejdere tæt på borgerne, og hvor vil I i givet fald finde pengene?",
-          "Hvordan vil I involvere pårørende i at udvikle og forbedre ældreområdet?"
-        ]
+          "Hvordan vil I gøre det nemmere at komme til og fra uddannelsessteder uden bil?",
+          "Har I konkrete planer for at skabe gode studiemiljøer uden for selve uddannelsesinstitutionerne?",
+          "Hvordan vil I samarbejde med lokale virksomheder om praktik og studiejobs?"
+        ],
+        toYoung: "Hvis unge ikke blander sig, er det ikke sikkert, at kommunen prioriterer studieliv og hverdagen omkring din uddannelse."
       },
-      saerligeBehoev: {
-        label: "Barn eller ung med særlige behov",
-        summary: "For børn og unge med særlige behov er kommunens prioriteringer ofte afgørende for, om hverdagen hænger sammen.",
+      arbejdeKommune: {
+        label: "Arbejder i kommunen",
         focus: [
-          "tidlig indsats i dagtilbud og skole",
-          "tilgang til støtte, PPR og specialtilbud",
-          "samarbejde mellem skole, forvaltning og familie"
+          "arbejdsvilkår i butikker, caféer og servicefag",
+          "åbningstider, natteliv og byliv, der skaber jobs",
+          "transport til og fra arbejde, især om aftenen"
         ],
         changes: [
-          "Ventetid på udredning, støtte og specialtilbud kan forkortes eller forlænges afhængigt af kommunens ressourcer.",
-          "Kommunen kan vælge at styrke lokale inkluderende tilbud eller bygge flere specialklasser og specialskoler.",
-          "Der kan være forskel på, hvor tæt kommunen følger op på indsatser og justerer dem, når noget ikke virker."
+          "Hvis natteliv og byliv presses, kan det betyde færre jobmuligheder for unge.",
+          "Kommunens valg om parkering, udeservering og støj kan styrke eller svække de steder, der ansætter unge.",
+          "Aftenbusser og natbusser kan ændres, så det bliver lettere eller sværere at komme sikkert hjem fra job."
         ],
         questions: [
-          "Hvordan vil I sikre, at børn i mistrivsel bliver opdaget tidligere og får hjælp hurtigere?",
-          "Hvor meget vil I konkret investere i forebyggelse, også selv om gevinsten først kan ses senere?",
-          "Hvordan vil I sikre, at forældre bliver taget alvorligt og inddraget som samarbejdspartnere?"
-        ]
+          "Hvordan vil I tage hensyn til de unge, der arbejder aften og nat, når I regulerer nattelivet?",
+          "Hvad vil I gøre for at skabe flere jobmuligheder for unge lokalt?",
+          "Hvordan tænker I transport og tryghed ind for dem, der arbejder, når andre har fri?"
+        ],
+        toYoung: "Din hverdag på arbejde påvirkes direkte af lokale beslutninger, også selv om du måske ikke ser det i dag til dag."
       },
-      brugerKollektiv: {
-        label: "Afhængig af kollektiv trafik",
-        summary: "Hvis du er afhængig af bus, tog eller lokal letbane, er kommunens aftaler og prioriteringer vigtige.",
+      kollektiv: {
+        label: "Bruger bus, tog eller natbus flere gange om ugen",
         focus: [
-          "hyppighed og linjeføring på lokale busruter",
-          "sammenhæng mellem stoppesteder, skoler, arbejde og indkøb",
-          "tryghed og tilgængelighed ved stoppesteder"
+          "linjeføring og hyppighed på de lokale ruter",
+          "natbusser og afgange sent om aftenen",
+          "sammenhæng mellem cykel, gang og kollektiv trafik"
         ],
         changes: [
-          "Buslinjer kan styrkes, lægges om eller nedlægges, hvis kommunen ændrer sine aftaler og tilskud.",
-          "Afstand til stoppesteder og ventetid kan ændre sig, når kommunen prioriterer vejprojekter og nye byområder.",
-          "Kommunen kan forbedre tryghed ved stoppesteder med belysning, opholdspladser og bedre krydsninger."
+          "Kommunen kan holde hånden under eller nedlægge ruter, der ikke er rentable, men vigtige for unge.",
+          "Tryghed ved stoppesteder, belysning og sikre kryds kan forbedres eller glemmes.",
+          "Der kan skabes bedre muligheder for at kombinere cykel og kollektiv trafik omkring knudepunkter."
         ],
         questions: [
-          "Hvilke konkrete ændringer i den lokale kollektive trafik ser I for jer de næste fire år?",
-          "Hvordan vil I sikre, at det er muligt at komme til uddannelse, arbejde og fritidstilbud uden bil?",
-          "Hvordan vægter I kollektiv trafik i landdistrikter i forhold til tætte byområder?"
-        ]
+          "Er I parate til at holde fast i aften og natbusser, også selv om de ikke altid er fyldte?",
+          "Hvordan vil I gøre det trygt at bruge bus og tog om aftenen for unge?",
+          "Hvilke konkrete områder i kommunen får forbedret kollektiv trafik først, hvis det står til jer?"
+        ],
+        toYoung: "Hvis unge ikke stemmer, er det nemmere at skære netop de busser væk, som unge bruger mest."
       },
-      pendlerLangt: {
-        label: "Lang pendling til arbejde eller uddannelse",
-        summary: "Lang pendling gør dig ekstra sårbar over for ændringer i trafik, parkering og kollektiv trafik.",
+      klima: {
+        label: "Går op i klima, grøn by og natur",
         focus: [
-          "parkeringsmuligheder ved stationer og knudepunkter",
-          "sammenhæng mellem lokal trafik og regional trafik",
-          "trafiksikkerhed på indfaldsveje og cykelruter"
+          "hvor meget grønt der er mellem bygningerne",
+          "om nye byområder bliver klimavenlige eller ej",
+          "klimatilpasning med regnvand og skybrud"
         ],
         changes: [
-          "Parkeringsforhold ved stationer kan strammes eller forbedres, alt efter kommunens prioriteringer.",
-          "Nye vejprojekter eller ændret trafikafvikling kan påvirke din daglige rejsetid markant.",
-          "Cykelstier og sikre ruter til stationer kan enten opgraderes eller nedprioriteres."
+          "Kommunen kan stille krav til grønne områder, træer og regnvandsløsninger i nye byggemodeller.",
+          "Det kan blive lettere eller sværere at vælge cykel, kollektiv trafik og fællesløsninger frem for bil.",
+          "Nogle områder kan blive bedre beskyttet mod oversvømmelse, mens andre må vente."
         ],
         questions: [
-          "Hvordan vil I gøre det lettere at kombinere cykel, bil og kollektiv trafik i hverdagen?",
-          "Har I konkrete planer for bedre adgang til stationer og knudepunkter i vores område?",
-          "Hvordan vejer I pendleres hverdag ind, når I prioriterer trafikinvesteringer?"
-        ]
+          "Hvilke tre klima eller naturprojekter vil I gennemføre først i næste valgperiode?",
+          "Hvordan sikrer I, at nye byområder bliver gode at leve i for unge, og ikke bare tætte og varme?",
+          "Hvordan vil I inddrage unge i beslutninger om grønne områder og klimaindsatser?"
+        ],
+        toYoung: "Kommunen beslutter meget af det, du oplever som grøn eller grå hverdag. Din stemme er en måde at blande dig i det på."
       },
-      borLandomraade: {
-        label: "Bopæl i landområde eller mindre by",
-        summary: "For borgere i landområder betyder kommunens prioriteringer ofte forskellen på liv i lokalsamfundet eller langsom udtynding.",
+      mental: {
+        label: "Udfordringer med mental trivsel i egen eller venners hverdag",
         focus: [
-          "nærhed til skole, dagtilbud og indkøb",
-          "kollektiv trafik, skolebus og flextrafik",
-          "lokale mødesteder, idræt og foreningsliv"
+          "tilbud til unge, der har det svært",
+          "ventetid på hjælp og rådgivning",
+          "ungevenlige mødesteder uden præstationskrav"
         ],
         changes: [
-          "Lukning eller sammenlægning af skoler og institutioner rammer ofte mindre byer først.",
-          "Hvis busruter ændres eller forsvinder, kan det blive svært for unge og ældre at komme rundt.",
-          "Kommunen kan vælge at investere i lokale mødesteder, kulturhuse og idrætsfaciliteter eller samle det centralt."
+          "Kommunen kan styrke lokale ungerådgivninger, samtaletilbud og anonyme indgange.",
+          "Der kan investeres i miljøer, hvor unge kan være uden at skulle præstere eller købe noget.",
+          "Samarbejde mellem skole, fritidstilbud og psykiatri kan prioriteres højt eller lavt."
         ],
         questions: [
-          "Hvilke konkrete løfter kan I give om skoler, dagtilbud og fritidstilbud i landdistrikterne?",
-          "Hvordan vil I sikre, at ældre og unge i landområder ikke bliver afhængige af bil for at kunne deltage i hverdagslivet?",
-          "Hvad er jeres langsigtede plan for udvikling af landsbyer og mindre byer i kommunen?"
-        ]
+          "Hvilke konkrete tilbud har I til unge, der mistrives, og vil I udbygge dem?",
+          "Hvordan vil I forkorte ventetid og gøre det nemt at få hjælp tidligt?",
+          "Hvad vil I gøre for at skabe trygge fællesskaber for unge, der ikke trives i klassisk foreningsliv?"
+        ],
+        toYoung: "Du bærer ikke ansvaret for systemet, men din stemme kan være med til at presse på for, at hjælpen faktisk findes."
       },
-      borTaetBy: {
-        label: "Bopæl i tæt byområde",
-        summary: "I tætte byområder er byudvikling, trafik og støj ofte centrale spørgsmål.",
+      kultur: {
+        label: "Bruger natteliv, kulturtilbud eller idræt",
         focus: [
-          "lokalplaner, byggehøjde og tæthed",
-          "trafik, parkering og støj",
-          "adgang til grønne områder og byrum"
+          "åbningstider og rammer for natteliv",
+          "tilskud til kultur og foreningsliv",
+          "kvalitet af haller, baner og spillesteder"
         ],
         changes: [
-          "Nye lokalplaner kan betyde mere byggeri, flere beboere og mere trafik tæt på dig.",
-          "Kommunen kan ændre parkeringsregler, ensrette gader eller lave nye cykelstier.",
-          "Grønne lommer, legepladser og små byrum kan prioriteres eller forsvinde i nye projekter."
+          "Kommunen kan vælge at støtte små scener, øvelokaler og lokale festivaler eller lade dem klare sig selv.",
+          "Sportshaller, baner og idrætsanlæg kan vedligeholdes, udbygges eller få lov at slide.",
+          "Regler for støj, åbningstider og udeservering kan forme, hvordan nattelivet ser ud for unge."
         ],
         questions: [
-          "Hvilke principper styrer jeres beslutninger om tæt byggeri i vores kvarter?",
-          "Hvordan vil I sikre rolige, grønne lommer i området, hvis der kommer flere boliger og mere trafik?",
-          "Hvordan inddrager I beboere tidligt, før store forandringer besluttes?"
-        ]
+          "Hvilken rolle mener I, at kultur og natteliv skal spille i vores kommune for unge?",
+          "Hvordan vil I sikre, at der er plads til både ro og liv i byen?",
+          "Har I planer om at styrke eller skære i tilskud til de steder, unge faktisk bruger?"
+        ],
+        toYoung: "Hvis kun de ældre stemmer, er det sjældent unges fritidsliv, der står øverst på prioriteringslisten."
       },
-      oversvoemmelse: {
-        label: "Risiko for oversvømmelse",
-        summary: "Hvis du bor nær vand eller lavtliggende områder, er klimatilpasning et meget konkret spørgsmål.",
+      flytte: {
+        label: "Overvejer at flytte fra kommunen",
         focus: [
-          "kommunens klimatilpasningsplaner og investeringer",
-          "krav til byggeri og sikring i udsatte områder",
-          "beredskab og information til borgere"
+          "om det giver mening at blive eller vende tilbage",
+          "hvordan kommunen udvikler sig for unge voksne",
+          "om der er job, bolig og fællesskaber for unge familier"
         ],
         changes: [
-          "Kommunen kan vælge at investere i diger, bassiner, regnvandsløsninger og anden beskyttelse.",
-          "Der kan komme skærpede krav til byggeri og kældre i udsatte områder.",
-          "Nogle områder kan blive fravalgt til yderligere udvikling af hensyn til risikoen."
+          "Kommunens valg om byudvikling kan gøre det mere eller mindre attraktivt for unge at blive boende.",
+          "Der kan arbejdes aktivt på at tiltrække virksomheder og skabe miljøer, som unge voksne gider leve i.",
+          "Hvis der ikke tænkes i unge familier, kan kommunen blive et sted, man kun bor, mens man er barn."
         ],
         questions: [
-          "Hvilke konkrete klimatilpasningsprojekter har I planlagt i de mest udsatte områder?",
-          "Hvordan vil I informere og involvere borgere, der bor i risikoområder?",
-          "Hvordan afvejer I hensynet til udvikling mod risikoen for oversvømmelse?"
-        ]
+          "Hvad er jeres plan for at gøre kommunen attraktiv for unge voksne de næste ti år?",
+          "Hvordan vil I sikre, at der både er job, bolig og fællesskab, som unge har lyst til at blive i?",
+          "Ser I unge som nogen, der bare passerer igennem, eller nogen, I vil kæmpe for at holde på?"
+        ],
+        toYoung: "Hvis du alligevel overvejer at flytte, kan du lige så godt være med til at præge, hvad du eventuelt kommer tilbage til."
       },
-      kulturFritid: {
-        label: "Aktiv i kultur og foreningsliv",
-        summary: "Hvis du bruger foreninger, idræt og kulturtilbud, er kommunens prioriteringer tydelige i din fritid.",
+      borHjemme: {
+        label: "Bor hjemme og er på vej videre",
         focus: [
-          "tilskud til foreninger og kulturinstitutioner",
-          "vedligeholdelse og udvikling af haller, baner og scener",
-          "adgang til faciliteter på tværs af alder og økonomi"
+          "mulighed for ungdomsbolig eller første egen bolig",
+          "uddannelsesmuligheder og transport i nærområdet",
+          "muligheder for fællesskaber uden for skolen"
         ],
         changes: [
-          "Tilskud til foreninger kan styrkes eller skæres, hvilket påvirker kontingenter og aktiviteter.",
-          "Kommunen kan investere i nye faciliteter eller lade eksisterende haller, baner og scener slide.",
-          "Valget af hvilke målgrupper der prioriteres, kan forme fritidstilbuddene mange år frem."
+          "Kommunen kan arbejde for flere ungdomsboliger og små lejligheder, der er til at betale.",
+          "Lokale uddannelsesmuligheder og transport kan gøre det muligt at blive i området i en periode.",
+          "Støtte til ungdomsklubber, foreninger og kulturhuse kan gøre overgangen fra hjem til eget liv lettere."
         ],
         questions: [
-          "Hvilken rolle mener I, at foreningsliv og kultur skal spille i vores kommune de næste år?",
-          "Hvordan vil I sikre, at børn og unge med begrænset økonomi også kan deltage i fritidstilbud?",
-          "Hvilke konkrete faciliteter eller tilbud vil I styrke først, hvis I får muligheden?"
-        ]
+          "Hvad vil I gøre for at skabe gode første boliger til unge i vores kommune?",
+          "Hvordan vil I gøre det muligt for unge at tage uddannelse og arbejde uden at skulle flytte langt væk med det samme?",
+          "Hvilke steder kan unge mødes, uden at det koster mange penge at være med?"
+        ],
+        toYoung: "Valget handler også om, hvor let eller svært det bliver for dig at tage det næste skridt ud af hjemmet."
       },
-      ansatKommune: {
-        label: "Ansat i kommunen",
-        summary: "Hvis du arbejder i kommunen, mærker du direkte konsekvenserne af politiske beslutninger om økonomi, arbejdsmiljø og organisering.",
+      jobUsikker: {
+        label: "Korte ansættelser, studiejob eller usikker tilknytning til arbejdsmarkedet",
         focus: [
-          "normeringer og arbejdspres i hverdagen",
-          "indflydelse på faglighed og udvikling",
-          "stabilitet i ledelse og organisering"
+          "lokale jobmuligheder for unge og nyuddannede",
+          "indsats for unge uden for job og uddannelse",
+          "samarbejde mellem kommune, virksomheder og uddannelser"
         ],
         changes: [
-          "Besparelser eller omprioriteringer kan føre til færre kolleger og mere pres i hverdagen.",
-          "Kommunen kan vælge at give mere tid til faglig udvikling og samarbejde eller at stramme skemaer og minutstyring.",
-          "Hyppige omorganiseringer kan skabe utryghed, mens langsigtede planer kan give mere ro."
+          "Kommunen kan vælge at prioritere indsatser for unge uden fodfæste på jobmarkedet.",
+          "Lokale erhvervsstrategier kan gøre det lettere eller sværere at finde arbejde efter studiet.",
+          "Jobcentre og ungeindsatser kan enten være rene kontrolorganer eller reelle medspillere."
         ],
         questions: [
-          "Hvordan vil I sikre, at der er sammenhæng mellem politiske ambitioner og hverdagen for medarbejderne?",
-          "Hvad vil I gøre for at fastholde og rekruttere medarbejdere på fx skole, ældre og socialområdet?",
-          "Hvordan vil I lytte til medarbejdernes erfaringer, før I ændrer strukturer og organisering?"
-        ]
+          "Hvilke konkrete tilbud har I til unge, der har svært ved at finde vej på arbejdsmarkedet?",
+          "Hvordan vil I samarbejde med lokale virksomheder om første job og lærepladser til unge?",
+          "Ser I unge uden job som en udgift eller som et område, der skal investeres aktivt i?"
+        ],
+        toYoung: "Selv midlertidige job og små skridt bliver påvirket af, hvordan kommunen vælger at se på unge uden fast arbejde."
       }
     };
 
     const chips = Array.from(document.querySelectorAll(".chip"));
     const generateBtn = document.getElementById("generate-btn");
     const clearBtn = document.getElementById("clear-btn");
+    const screenshotToggle = document.getElementById("screenshot-toggle");
     const errorText = document.getElementById("error-text");
     const resultsCard = document.getElementById("results-card");
 
     chips.forEach(chip => {
       chip.addEventListener("click", (e) => {
-        // undgå dobbelt toggle hvis man rammer input
         if (e.target.tagName.toLowerCase() === "input") return;
         chip.classList.toggle("selected");
         const input = chip.querySelector("input");
@@ -829,6 +973,10 @@
       resultsCard.classList.remove("visible");
       resultsCard.innerHTML = "";
       errorText.classList.remove("visible");
+    });
+
+    screenshotToggle.addEventListener("click", () => {
+      document.body.classList.toggle("screenshot-mode");
     });
 
     generateBtn.addEventListener("click", () => {
@@ -858,8 +1006,8 @@
       }
 
       const countText = selectedProfiles.length === 1
-        ? "1 valgt forhold i din hverdag"
-        : `${selectedProfiles.length} valgte forhold i din hverdag`;
+        ? "1 udsagn valgt"
+        : `${selectedProfiles.length} udsagn valgt`;
 
       const allFocus = [];
       selectedProfiles.forEach(p => allFocus.push(...p.focus));
@@ -867,28 +1015,37 @@
       const topFocus = uniqueFocus.slice(0, 4);
 
       const introText = selectedProfiles.length === 1
-        ? "På baggrund af dit valg får du her en kort guide til, hvad der især er værd at holde øje med i kommunalpolitikken."
-        : "På baggrund af dine valg får du her en samlet guide til, hvad der især er værd at holde øje med i kommunalpolitikken.";
+        ? "Her er en kort guide til, hvad kommunalvalget især betyder for din unge i den situation. Brug den som afsæt for en rolig samtale."
+        : "Her er en samlet guide til, hvad kommunalvalget især betyder for din unge, sådan som du har beskrevet deres liv. Brug den som afsæt for en rolig samtale.";
 
-      const pillHtml = topFocus.map(f => `<span class="pill">${f}</span>`).join("");
+      const pillHtml = topFocus
+        .map(f => `<span class="pill">${f}</span>`)
+        .join("");
 
       const blocksHtml = selectedProfiles.map(profile => {
-        const changesList = profile.changes.map(item => `<li>${item}</li>`).join("");
-        const questionsList = profile.questions.map(item => `<li>${item}</li>`).join("");
+        const changesList = profile.changes
+          .map(item => `<li>${item}</li>`)
+          .join("");
+        const questionsList = profile.questions
+          .map(item => `<li>${item}</li>`)
+          .join("");
         return `
           <section class="profile-block">
             <div class="profile-title">${profile.label}</div>
             <div class="profile-section">
-              <h3>Hvorfor det betyder noget</h3>
-              <p>${profile.summary}</p>
+              <h3>Hvad kommunen bestemmer, som rammer unge her</h3>
+              <p>${profile.focus.join(", ")}.</p>
             </div>
             <div class="profile-section">
               <h3>Hvad kan ændre sig de næste fire år?</h3>
               <ul>${changesList}</ul>
             </div>
             <div class="profile-section">
-              <h3>Gode spørgsmål til kandidater eller partier</h3>
+              <h3>Spørgsmål du kan bruge i snakken</h3>
               <ul class="questions-list">${questionsList}</ul>
+            </div>
+            <div class="to-you">
+              <span>Til din unge:</span>${profile.toYoung}
             </div>
           </section>
         `;
@@ -896,12 +1053,11 @@
 
       resultsCard.innerHTML = `
         <div class="results-header">
-          <div class="results-title">Din personlige valgguide</div>
+          <div class="results-title">Personlig valgguide til jer to</div>
           <div class="results-tag">${countText}</div>
         </div>
         <p class="results-intro">
-          Guiden er tænkt som en støtte, når du læser valgmateriale, følger med i lokal journalistik
-          eller møder kandidaterne. Brug gerne spørgsmålene som udgangspunkt for dine egne.
+          ${introText}
         </p>
         <div class="pill-row">
           ${pillHtml}
@@ -909,8 +1065,8 @@
         ${blocksHtml}
         <div class="results-footer">
           <span>
-            <span class="results-footer-emoji">💡</span>
-            <span>Tag gerne et skærmbillede eller noter dine vigtigste spørgsmål, før du går i stemmeboksen.</span>
+            <span class="results-footer-emoji">💬</span>
+            <span>Tag en kort snak før valgdagen. Det behøver ikke være langt eller perfekt.</span>
           </span>
           <button type="button" onclick="window.print()">
             <span class="results-footer-emoji">🖨️</span>
